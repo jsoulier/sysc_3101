@@ -1,3 +1,6 @@
+// Author: Jaan Soulier
+// Student Number: 101189819
+
 package main
 
 import (

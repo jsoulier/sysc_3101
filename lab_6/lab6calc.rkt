@@ -16,7 +16,7 @@
 ; Evaluate an expression:
 
 (define (calc-eval exp)
-  (cond ((number? exp) exp)
+  (cond ((number? exp) exp)      
         ((list? exp) (calc-apply (car exp) (map calc-eval (cdr exp))))
         (else (error "Calc: bad expression: " exp))))
 
@@ -29,7 +29,7 @@
         ((eq? fn '**) (if (not (equal? (length args) 2)) (error "Calc: ** requires exactly 2 args")
                            (expt (car args) (cadr args))))
         ((eq? fn 'max) (if (empty? args) (error "Calc: max requires 1 or more args")
-                           (foldr max (car args) args)))
+                           (apply max args)))
         ((eq? fn '+) (foldr + 0 args))
         ((eq? fn '-) (cond ((null? args) (error "Calc: no args to -"))
                            ((= (length args) 1) (- (car args)))
@@ -41,3 +41,4 @@
         (else (error "Calc: bad operator:" fn))))
 
 (calc)
+
